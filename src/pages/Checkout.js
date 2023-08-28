@@ -11,7 +11,10 @@ import {
   selectLoggedInUser,
   updateUserAsync,
 } from "../features/auth/authSlice";
-import { createOrderAsync } from "../features/order/orderSlice";
+import {
+  createOrderAsync,
+  selectCurrentOrder,
+} from "../features/order/orderSlice";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -26,8 +29,8 @@ function Checkout() {
   } = useForm();
 
   const user = useSelector(selectLoggedInUser);
-
   const items = useSelector(selectItems);
+  const currentOrder = useSelector(selectCurrentOrder);
   const total = items.reduce(
     (amount, items) => items.price * items.quantity + amount,
     0
@@ -53,15 +56,23 @@ function Checkout() {
   };
 
   const handleOrder = (e) => {
-    const order = {
-      items,
-      totalItems,
-      total,
-      user,
-      paymentMethod,
-      selectedAddress,
-    };
-    dispatch(createOrderAsync(order));
+    if (selectedAddress && paymentMethod) {
+      const order = {
+        items,
+        totalItems,
+        total,
+        user,
+        paymentMethod,
+        selectedAddress,
+        status: "pending", // Order status can be delivered, received
+      };
+      dispatch(createOrderAsync(order));
+      // Need to redirect from here to a new page of order success.
+    } else {
+      // TODO : We can use proper messaging popup here.
+      alert("Enter Address and Payment method");
+    }
+
     // TODO : redirect to order-success page
     // TODO : clear cart after order
     // TODO : on Server change the stock number of items.
@@ -70,6 +81,12 @@ function Checkout() {
   return (
     <>
       {!items.length && <Navigate to="/" replace={true}></Navigate>}
+      {currentOrder && (
+        <Navigate
+          to={`/order-success/${currentOrder.id}`}
+          replace={true}
+        ></Navigate>
+      )}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
           <div className="lg:col-span-3">
@@ -91,7 +108,7 @@ function Checkout() {
             >
               <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
-                  <h2 className="text-2xl text-xl font-semibold leading-7 text-gray-900">
+                  <h2 className="lg:text-2xl text-xl font-semibold leading-7 text-gray-900">
                     Personal Information
                   </h2>
                   <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -429,8 +446,8 @@ function Checkout() {
                 </p>
                 <div className="mt-6">
                   <div
-                    className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                     onClick={handleOrder}
+                    className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                   >
                     Order Now
                   </div>

@@ -19,6 +19,10 @@ import {
 } from "react-router-dom";
 import { selectLoggedInUser } from "./features/auth/authSlice";
 import { useEffect } from "react";
+import PageNotFound from "./pages/404";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
+import UserOrders from "./features/user/components/UserOrders";
+import UserOrdersPage from "./pages/UserOrderPages";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +65,19 @@ const router = createBrowserRouter([
       </Protected>
     ),
   },
+  {
+    path: "*",
+    element: <PageNotFound></PageNotFound>,
+  },
+  {
+    path: "order-success/:id",
+    element: <OrderSuccessPage></OrderSuccessPage>,
+  },
+  {
+    path: "orders",
+    element: <UserOrdersPage></UserOrdersPage>,
+    // TODO: We will add page later right now using component directly
+  },
 ]);
 
 function App() {
@@ -71,7 +88,7 @@ function App() {
     if (user) {
       dispatch(fetchItemsByUserIdAsync(user.id));
     }
-  }, [dispatch , user])
+  }, [dispatch, user]);
 
   return (
     <div className="App">
