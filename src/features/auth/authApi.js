@@ -31,3 +31,9 @@ export function checkUser(loginInfo, reject) {
     // TODO: On server it will only return some info of user (not password)
   });
 }
+
+export function signOut(userId) {
+  return new Promise(async (resolve) => {
+    resolve({ data: "success" });
+  });
+}
