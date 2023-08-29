@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Protected from "./features/auth/components/Protected";
-// import { fetchItemsByUserIdAsync } from "./features/cart/cartAPI";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
@@ -10,19 +9,14 @@ import LoginPage from "./pages/LoginPage";
 import ProjectDetailPage from "./pages/ProductDetailPage";
 import SignupPage from "./pages/SignupPage";
 import * as React from "react";
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { selectLoggedInUser } from "./features/auth/authSlice";
 import { useEffect } from "react";
 import PageNotFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-import UserOrders from "./features/user/components/UserOrders";
 import UserOrdersPage from "./pages/UserOrderPages";
+import UserProfilePage from "./pages/UserProfilePage";
+import { fetchLoggedInUserAsync } from "./features/user/userSlice";
 
 const router = createBrowserRouter([
   {
@@ -66,16 +60,21 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "*",
+    path: "/*",
     element: <PageNotFound></PageNotFound>,
   },
   {
-    path: "order-success/:id",
+    path: "/order-success/:id",
     element: <OrderSuccessPage></OrderSuccessPage>,
   },
   {
-    path: "orders",
+    path: "/orders",
     element: <UserOrdersPage></UserOrdersPage>,
+    // TODO: We will add page later right now using component directly
+  },
+  {
+    path: "/profile",
+    element: <UserProfilePage></UserProfilePage>,
     // TODO: We will add page later right now using component directly
   },
 ]);
@@ -87,6 +86,7 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemsByUserIdAsync(user.id));
+      dispatch(fetchLoggedInUserAsync(user.id));
     }
   }, [dispatch, user]);
 

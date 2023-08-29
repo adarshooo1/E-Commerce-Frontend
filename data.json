@@ -2340,22 +2340,13 @@
       "password": "Adarsh@111",
       "addresses": [
         {
-          "name": "Adarsh Singh",
+          "name": "Adarsh Kumar Singh",
           "email": "adarshsinghak001@gmail.com",
-          "phone": "7011116245",
-          "street": "Salarpur",
           "city": "Noida",
           "state": "Uttar Pradesh",
-          "pinCode": "201304"
-        },
-        {
-          "name": "Mayank mehta",
-          "email": "mayankmehta@gmail.com",
-          "phone": "8089888786",
-          "street": "Sarojani",
-          "city": "Delhi",
-          "state": "Delhi",
-          "pinCode": "110024"
+          "pinCode": "201304",
+          "phone": "+917011116245",
+          "street": "Salarpur"
         }
       ],
       "id": 1
@@ -2390,41 +2381,32 @@
           ],
           "quantity": 1,
           "user": 1,
-          "id": 1
+          "id": 2
         }
       ],
+      "totalAmount": 549,
       "totalItems": 1,
-      "total": 549,
       "user": {
         "email": "user1@gmail.com",
         "password": "Adarsh@111",
         "addresses": [
           {
-            "name": "Adarsh Singh",
+            "name": "Adarsh Kumar Singh",
             "email": "adarshsinghak001@gmail.com",
-            "phone": "7011116245",
+            "phone": "+917011116245",
             "street": "Salarpur",
             "city": "Noida",
             "state": "Uttar Pradesh",
             "pinCode": "201304"
-          },
-          {
-            "name": "Mayank mehta",
-            "email": "mayankmehta@gmail.com",
-            "phone": "8089888786",
-            "street": "Sarojani",
-            "city": "Delhi",
-            "state": "Delhi",
-            "pinCode": "110024"
           }
         ],
         "id": 1
       },
       "paymentMethod": "cash",
       "selectedAddress": {
-        "name": "Adarsh Singh",
+        "name": "Adarsh Kumar Singh",
         "email": "adarshsinghak001@gmail.com",
-        "phone": "7011116245",
+        "phone": "+917011116245",
         "street": "Salarpur",
         "city": "Noida",
         "state": "Uttar Pradesh",
@@ -2432,69 +2414,6 @@
       },
       "status": "pending",
       "id": 1
-    },
-    {
-      "items": [
-        {
-          "title": "iPhone X",
-          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-          "price": 899,
-          "discountPercentage": 17.94,
-          "rating": 4.44,
-          "stock": 34,
-          "brand": "Apple",
-          "category": "smartphones",
-          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/2/1.jpg",
-            "https://i.dummyjson.com/data/products/2/2.jpg",
-            "https://i.dummyjson.com/data/products/2/3.jpg",
-            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-          ],
-          "quantity": 1,
-          "user": 1,
-          "id": 1
-        }
-      ],
-      "totalItems": 1,
-      "total": 899,
-      "user": {
-        "email": "user1@gmail.com",
-        "password": "Adarsh@111",
-        "addresses": [
-          {
-            "name": "Adarsh Singh",
-            "email": "adarshsinghak001@gmail.com",
-            "phone": "7011116245",
-            "street": "Salarpur",
-            "city": "Noida",
-            "state": "Uttar Pradesh",
-            "pinCode": "201304"
-          },
-          {
-            "name": "Mayank mehta",
-            "email": "mayankmehta@gmail.com",
-            "phone": "8089888786",
-            "street": "Sarojani",
-            "city": "Delhi",
-            "state": "Delhi",
-            "pinCode": "110024"
-          }
-        ],
-        "id": 1
-      },
-      "paymentMethod": "card",
-      "selectedAddress": {
-        "name": "Adarsh Singh",
-        "email": "adarshsinghak001@gmail.com",
-        "phone": "7011116245",
-        "street": "Salarpur",
-        "city": "Noida",
-        "state": "Uttar Pradesh",
-        "pinCode": "201304"
-      },
-      "status": "pending",
-      "id": 2
     }
   ]
 }
