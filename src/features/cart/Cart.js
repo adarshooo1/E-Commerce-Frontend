@@ -1,12 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteItemFromCartAsync,
   selectItems,
   updateCartAsync,
 } from "./cartSlice";
-import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, Navigate } from "react-router-dom";
 
 export default function Cart() {

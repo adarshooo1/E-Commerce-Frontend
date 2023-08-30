@@ -3,8 +3,10 @@ import ProductDetail from "../features/product/components/ProductDetail";
 
 export default function ProjectDetailPage() {
   return (
-    <Navbar>
-      <ProductDetail></ProductDetail>
-    </Navbar>
+    <div>
+      <Navbar>
+        <ProductDetail></ProductDetail>
+      </Navbar>
+    </div>
   );
 }
