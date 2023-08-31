@@ -6,12 +6,13 @@ import {
   updateCartAsync,
 } from "./cartSlice";
 import { Link, Navigate } from "react-router-dom";
+import { discountedPrice } from "../../app/constants";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
   const total = items.reduce(
-    (amount, items) => items.price * items.quantity + amount,
+    (amount, items) => discountedPrice(items) * items.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, items) => items.quantity + total, 0);
@@ -50,7 +51,7 @@ export default function Cart() {
                         <h3>
                           <a href={item.href}>{item.title}</a>
                         </h3>
-                        <p className="ml-4">${item.price}</p>
+                        <p className="ml-4">${discountedPrice(item)}</p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
                     </div>
