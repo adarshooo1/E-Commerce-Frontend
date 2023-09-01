@@ -435,7 +435,12 @@ function ProductGrid({ products }) {
                     <p className="text-sm text-red-400">product deleted</p>
                   </div>
                 )}
-                {/* will not be needed when backend is implemented */}
+                {product.stock <= 0 && (
+                  <div>
+                    <p className="text-sm text-red-400">Out Of Stock</p>
+                  </div>
+                )}
+                {/*TODO: will not be needed when backend is implemented */}
               </div>
             </Link>
           ))}

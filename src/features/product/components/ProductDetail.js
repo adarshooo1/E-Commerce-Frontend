@@ -4,9 +4,10 @@ import { RadioGroup } from "@headlessui/react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductByIdAsync, selectProductById } from "../productSlice";
-import { addToCartAsync } from "../../cart/cartSlice";
+import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import { selectLoggedInUser } from "../../auth/authSlice";
 import { discountedPrice } from "../../../app/constants";
+import { useAlert } from "react-alert";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -39,15 +40,28 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const user = useSelector(selectLoggedInUser);
+  const items = useSelector(selectItems);
   const product = useSelector(selectProductById);
   const dispatch = useDispatch();
   const params = useParams();
+  const alert = useAlert();
 
   const handleCart = (e) => {
     e.preventDefault();
-    const newItem = { ...product, quantity: 1, user: user.id };
-    delete newItem["id"];
-    dispatch(addToCartAsync(newItem));
+    if (items.findIndex((item) => item.productId === product.id) < 0) {
+      const newItem = {
+        ...product,
+        productId: product.id,
+        quantity: 1,
+        user: user.id,
+      };
+      delete newItem["id"];
+      dispatch(addToCartAsync(newItem));
+      // Todo: It will be based on server response of backend
+      alert.success("Item Added");
+    } else {
+      alert.error("Item Already Added");
+    }
   };
 
   useEffect(() => {
