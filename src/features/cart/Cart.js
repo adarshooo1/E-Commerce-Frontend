@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteItemFromCartAsync,
@@ -7,10 +7,13 @@ import {
 } from "./cartSlice";
 import { Link, Navigate } from "react-router-dom";
 import { discountedPrice } from "../../app/constants";
+import Modal from "../common/Modal";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
+  const [openModal, setOpenModal] = useState(null);
+
   const total = items.reduce(
     (amount, items) => discountedPrice(items) * items.quantity + amount,
     0
@@ -77,8 +80,19 @@ export default function Cart() {
                       </div>
 
                       <div className="flex">
+                        <Modal
+                          title={`Delete ${item.title}`}
+                          message="Are you Sure? Do you want to remove this cart Item."
+                          dangerOption="Delete"
+                          cancelOption="Cancel"
+                          dangerAction={(e) => handleRemove(e, item.id)}
+                          cancelAction={() => setOpenModal(null)}
+                          showModal={openModal === item.id}
+                        ></Modal>
                         <button
-                          onClick={(e) => handleRemove(e, item.id)}
+                          onClick={(e) => {
+                            setOpenModal(item.id);
+                          }}
                           type="button"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
