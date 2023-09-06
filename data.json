@@ -2375,6 +2375,13 @@
       ],
       "role": "admin",
       "id": 3
+    },
+    {
+      "email": "Adarsh1@gmail.com",
+      "password": "Adarsh1@gmail.com",
+      "addresses": [],
+      "role": "user",
+      "id": 4
     }
   ],
   "cart": [],
