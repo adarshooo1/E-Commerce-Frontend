@@ -1,8 +1,8 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectError, selectLoggedInUser } from "../authSlice";
 import { Link, Navigate } from "react-router-dom";
+import { checkUserAsync } from "../authSlice";
 import { useForm } from "react-hook-form";
-import { checkUserAsync, selectError, selectLoggedInUser } from "../authSlice";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -21,11 +21,11 @@ export default function Login() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="/App Logo.png"
+            src="App Logo.png"
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Log In to your account
+            Log in to your account
           </h2>
         </div>
 
@@ -36,7 +36,6 @@ export default function Login() {
               dispatch(
                 checkUserAsync({ email: data.email, password: data.password })
               );
-              // console.log(data);
             })}
             className="space-y-6"
           >
@@ -51,7 +50,7 @@ export default function Login() {
                 <input
                   id="email"
                   {...register("email", {
-                    required: "e-mail is required",
+                    required: "email is required",
                     pattern: {
                       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
                       message: "email not valid",
@@ -61,7 +60,7 @@ export default function Login() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.email && (
-                  <p className="text-red-500">{errors?.email?.message}</p>
+                  <p className="text-red-500">{errors.email.message}</p>
                 )}
               </div>
             </div>
@@ -96,7 +95,9 @@ export default function Login() {
                   <p className="text-red-500">{errors.password.message}</p>
                 )}
               </div>
-              {error && <p className="text-red-500">{errors.message}</p>}
+              {error && (
+                <p className="text-red-500">{error || error.message}</p>
+              )}
             </div>
 
             <div>
@@ -104,7 +105,7 @@ export default function Login() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Log In
+                Log in
               </button>
             </div>
           </form>

@@ -10,9 +10,8 @@ import {
 } from "../../product/productSlice";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../common/Modal";
-import { useState } from "react";
 import { useAlert } from "react-alert";
 
 function ProductForm() {
@@ -30,7 +29,6 @@ function ProductForm() {
   const selectedProduct = useSelector(selectProductById);
   const [openModal, setOpenModal] = useState(null);
   const alert = useAlert();
-
   useEffect(() => {
     if (params.id) {
       dispatch(fetchProductByIdAsync(params.id));
@@ -87,13 +85,12 @@ function ProductForm() {
             product.id = params.id;
             product.rating = selectedProduct.rating || 0;
             dispatch(updateProductAsync(product));
-            alert.success("Product Updated Successfully");
-            //TODO:  These alerts should be initiated from the backend, what if its failed?
+            alert.success("Product Updated");
             reset();
           } else {
             dispatch(createProductAsync(product));
-            alert.success("Product Created Successfully");
-            //TODO:  These alerts should be initiated from the backend, what if its failed?
+            alert.success("Product Created");
+            // TODO: these alerts should check if API failed
             reset();
           }
         })}
@@ -443,7 +440,7 @@ function ProductForm() {
             Cancel
           </button>
 
-          {selectedProduct && selectedProduct.deleted && (
+          {selectedProduct && !selectedProduct.deleted && (
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -466,7 +463,7 @@ function ProductForm() {
       {selectedProduct && (
         <Modal
           title={`Delete ${selectedProduct.title}`}
-          message="Are you Sure? Do you want to remove this Product."
+          message="Are you sure you want to delete this Product ?"
           dangerOption="Delete"
           cancelOption="Cancel"
           dangerAction={handleDelete}
