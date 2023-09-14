@@ -10,7 +10,11 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import SignupPage from "./pages/SignupPage";
 import * as React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { checkAuthAsync, selectLoggedInUser, selectUserChecked } from "./features/auth/authSlice";
+import {
+  checkAuthAsync,
+  selectLoggedInUser,
+  selectUserChecked,
+} from "./features/auth/authSlice";
 import { useEffect } from "react";
 import PageNotFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
@@ -26,6 +30,7 @@ import AdminProductFormPage from "./pages/AdminProductFormPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
 import { Provider, positions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import StripeCheckout from "./pages/StripeCheckout";
 const options = {
   timeout: 5000,
   position: positions.BOTTOM_LEFT,
@@ -137,6 +142,14 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/stripe-checkout/",
+    element: (
+      <Protected>
+        <StripeCheckout></StripeCheckout>
+      </Protected>
+    ),
+  },
+  {
     path: "/logout",
     element: <Logout></Logout>,
   },
@@ -153,7 +166,7 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
-  const userChecked  = useSelector(selectUserChecked);
+  const userChecked = useSelector(selectUserChecked);
 
   useEffect(() => {
     dispatch(checkAuthAsync());
@@ -168,9 +181,11 @@ function App() {
 
   return (
     <div className="App">
-      {userChecked && <Provider template={AlertTemplate} {...options}>
-        <RouterProvider router={router} />
-      </Provider>}
+      {userChecked && (
+        <Provider template={AlertTemplate} {...options}>
+          <RouterProvider router={router} />
+        </Provider>
+      )}
     </div>
   );
 }
