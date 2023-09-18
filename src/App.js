@@ -126,7 +126,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/orders",
+    path: "/my-orders",
     element: (
       <Protected>
         <UserOrdersPage></UserOrdersPage>
@@ -175,18 +175,22 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemsByUserIdAsync());
+      // we can get req.user by token on backend so no need to give in front-end
       dispatch(fetchLoggedInUserAsync());
     }
   }, [dispatch, user]);
 
   return (
-    <div className="App">
-      {userChecked && (
-        <Provider template={AlertTemplate} {...options}>
-          <RouterProvider router={router} />
-        </Provider>
-      )}
-    </div>
+    <>
+      <div className="App">
+        {userChecked && (
+          <Provider template={AlertTemplate} {...options}>
+            <RouterProvider router={router} />
+          </Provider>
+        )}
+        {/* Link must be inside the Provider */}
+      </div>
+    </>
   );
 }
 
