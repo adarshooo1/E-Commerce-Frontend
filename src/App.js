@@ -31,6 +31,7 @@ import AdminOrdersPage from "./pages/AdminOrdersPage";
 import { Provider, positions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import StripeCheckout from "./pages/StripeCheckout";
+// import ResetPasswordPage from "./pages/ResetPasswordPage";
 const options = {
   timeout: 5000,
   position: positions.BOTTOM_LEFT,

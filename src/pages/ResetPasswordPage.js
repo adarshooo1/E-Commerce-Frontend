@@ -1,0 +1,1 @@
+import ResetPassword from "../features/auth/components/ResetPassword";

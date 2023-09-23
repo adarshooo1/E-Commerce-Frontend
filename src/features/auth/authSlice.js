@@ -1,11 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUser, createUser, signOut, checkAuth } from "./authAPI";
+import {
+  loginUser,
+  createUser,
+  signOut,
+  checkAuth,
+  resetPasswordRequest,
+} from "./authAPI";
 
 const initialState = {
   loggedInUserToken: null, // this should only contain user identity => 'id'/'role'
   status: "idle",
   error: null,
   userChecked: false,
+  mailSent: false,
+  // passwordReset: false,
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -38,6 +46,18 @@ export const checkAuthAsync = createAsyncThunk("user/checkAuth", async () => {
     console.log(error);
   }
 });
+
+export const resetPasswordRequestAsync = createAsyncThunk(
+  "user/resetPasswordRequest",
+  async (email) => {
+    try {
+      const response = await resetPasswordRequest(email);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const signOutAsync = createAsyncThunk(
   "user/signOut",
@@ -90,6 +110,13 @@ export const authSlice = createSlice({
       .addCase(checkAuthAsync.rejected, (state, action) => {
         state.status = "idle";
         state.userChecked = true;
+      })
+      .addCase(resetPasswordRequestAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(resetPasswordRequestAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.mailSent = true;
       });
   },
 });
@@ -99,5 +126,7 @@ export const selectLoggedInUser = (state) => state.auth.loggedInUserToken;
 export const selectError = (state) => state.auth.error;
 
 export const selectUserChecked = (state) => state.auth.userChecked;
+
+export const selectMailSent = (state) => state.auth.mailSent;
 
 export default authSlice.reducer;
