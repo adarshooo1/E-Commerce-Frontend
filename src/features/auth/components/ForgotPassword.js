@@ -1,10 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPasswordRequestAsync, selectMailSent } from "../authSlice";
 
-export default function Logout() {
+export default function ForgotPassword() {
   const mailSent = useSelector(selectMailSent);
   const dispatch = useDispatch();
   const {
@@ -49,7 +48,7 @@ export default function Logout() {
                 <input
                   id="email"
                   {...register("email", {
-                    required: "e-mail is required",
+                    required: "email is required",
                     pattern: {
                       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
                       message: "email not valid",
@@ -59,7 +58,7 @@ export default function Logout() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.email && (
-                  <p className="text-red-500">{errors?.email?.message}</p>
+                  <p className="text-red-500">{errors.email.message}</p>
                 )}
                 {mailSent && <p className="text-green-500">Mail Sent</p>}
               </div>
@@ -76,7 +75,7 @@ export default function Logout() {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            have account?{" "}
+            Send me back to{" "}
             <Link
               to="/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
