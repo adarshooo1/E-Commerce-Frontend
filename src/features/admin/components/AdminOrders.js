@@ -147,7 +147,7 @@ function AdminOrders() {
                       })
                     }
                   >
-                    Order Updated
+                    Last Updated
                     {sort._sort === "updatedAt" &&
                       (sort._order === "asc" ? (
                         <ArrowUpIcon className="w-4 h-4 inline"></ArrowUpIcon>
@@ -224,7 +224,7 @@ function AdminOrders() {
                     </td>
                     <td className="py-3 px-2 text-center">
                       <div className="flex items-center justify-center">
-                        ${order.paymentMethod}
+                        {order.paymentMethod}
                       </div>
                     </td>
                     <td className="py-3 px-2 text-center">
@@ -248,14 +248,14 @@ function AdminOrders() {
                     <td className="py-3 px-2 text-center">
                       <div className="flex items-center justify-center">
                         {order.createdAt
-                          ? new Date(order.createdAt).toLocaleDateString
+                          ? new Date(order.createdAt).toLocaleString()
                           : null}
                       </div>
                     </td>
                     <td className="py-3 px-2 text-center">
                       <div className="flex items-center justify-center">
                         {order.updatedAt
-                          ? new Date(order.updatedAt).toLocaleDateString
+                          ? new Date(order.updatedAt).toLocaleString()
                           : null}
                       </div>
                     </td>

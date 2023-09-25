@@ -73,9 +73,6 @@ function Checkout() {
       // TODO : we can use proper messaging popup here
       alert("Enter Address and Payment method");
     }
-    //TODO : Redirect to order-success page
-    //TODO : clear cart after order
-    //TODO : on server change the stock number of items
   };
 
   return (
@@ -365,7 +362,7 @@ function Checkout() {
                         htmlFor="cash"
                         className="block text-sm font-medium leading-6 text-gray-900"
                       >
-                        Cash
+                        Cash On Delivery
                       </label>
                     </div>
                     <div className="flex items-center gap-x-3">
@@ -382,7 +379,7 @@ function Checkout() {
                         htmlFor="card"
                         className="block text-sm font-medium leading-6 text-gray-900"
                       >
-                        Card Payment
+                        Credit / Debit /ATM Card
                       </label>
                     </div>
                   </div>
