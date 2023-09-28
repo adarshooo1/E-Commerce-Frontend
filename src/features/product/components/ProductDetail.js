@@ -5,22 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductByIdAsync, selectProductById } from "../productSlice";
 import { useParams } from "react-router-dom";
 import { addToCartAsync, selectItems } from "../../cart/cartSlice";
-import { discountedPrice } from "../../../app/constants";
 import { useAlert } from "react-alert";
-
-// TODO: In server data we will add colors, sizes , highlights. to each product
-const highlights = [
-  "Hand cut and sewn locally",
-  "Dyed with our proprietary colors",
-  "Pre-washed & pre-shrunk",
-  "Ultra-soft 100% cotton",
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// TODO : Loading UI
+// CAN DO : Loading UI
 
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState();
@@ -45,9 +36,7 @@ export default function ProductDetail() {
       if (selectedSize) {
         newItem.size = selectedSize;
       }
-      dispatch(addToCartAsync(newItem));
-      // TODO: it will be based on server response of backend
-      alert.success("Item added to Cart");
+      dispatch(addToCartAsync({ item: newItem, alert }));
     } else {
       alert.error("Item Already added");
     }
@@ -147,7 +136,7 @@ export default function ProductDetail() {
                 ${product.price}
               </p>
               <p className="text-3xl tracking-tight text-gray-900">
-                ${discountedPrice(product)}
+                ${product.discountPrice}
               </p>
 
               {/* Reviews */}

@@ -42,8 +42,8 @@ function NavBar({ children }) {
                         <Link to="/">
                           <img
                             className="h-8 w-8"
-                            src="/App Logo.png"
-                            alt="Your Company"
+                            src="/appLogo.png"
+                            alt="E-Commerce Logo"
                           />
                         </Link>
                       </div>

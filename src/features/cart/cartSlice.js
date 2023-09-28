@@ -10,12 +10,12 @@ import {
 const initialState = {
   status: "idle",
   items: [],
-  cartLoaded : false,
+  cartLoaded: false,
 };
 
 export const addToCartAsync = createAsyncThunk(
   "cart/addToCart",
-  async (item) => {
+  async ({ item, alert }) => {
     const response = await addToCart(item);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
@@ -49,14 +49,11 @@ export const deleteItemFromCartAsync = createAsyncThunk(
   }
 );
 
-export const resetCartAsync = createAsyncThunk(
-  "cart/resetCart",
-  async () => {
-    const response = await resetCart(); // Use the correct function
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
-  }
-);
+export const resetCartAsync = createAsyncThunk("cart/resetCart", async () => {
+  const response = await resetCart(); // Use the correct function
+  // The value we return becomes the `fulfilled` action payload
+  return response.data;
+});
 
 export const cartSlice = createSlice({
   name: "cart",

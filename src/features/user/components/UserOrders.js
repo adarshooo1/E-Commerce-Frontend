@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLoggedInUserOrderAsync, selectUserOrders } from "../userSlice";
-import { discountedPrice } from "../../../app/constants";
 
 export default function UserOrders() {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ export default function UserOrders() {
                                   </a>
                                 </h3>
                                 <p className="ml-4">
-                                  ${discountedPrice(item.product)}
+                                  ${item.product.discountPrice}
                                 </p>
                               </div>
                               <p className="mt-1 text-sm text-gray-500">
